@@ -21,11 +21,15 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long empID;
 	private String name;
-	private long salary;
-	
+	private Long salary;
+
+	public Employee() {
+
+	}
+
 	public Employee(EmployeePayrollDTO employeePayrollDTO) {
 		this.name = employeePayrollDTO.name;
-		this.salary = employeePayrollDTO.salary;	
+		this.salary = employeePayrollDTO.salary;
 	}
 
 	public String getName() {
@@ -43,6 +47,4 @@ public class Employee {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
-
-	
 }

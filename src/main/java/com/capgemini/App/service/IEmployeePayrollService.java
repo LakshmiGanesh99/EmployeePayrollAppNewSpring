@@ -10,12 +10,11 @@ public interface IEmployeePayrollService {
 	
 	Employee addEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO);
 
-	void updateEmployeeByID(long empID, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException;
+	Employee getEmployeeData(long empID) throws EmployeeException;
 
-	Employee getEmployeeData(long empId) throws EmployeeException;
+	void updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException;
+
+	void deleteEmployeeById(long empId) throws EmployeeException;
 
 	List getAllEmployeeData();
-
-	void deleteEmployeeById(long empId)  throws EmployeeException;
-
 }

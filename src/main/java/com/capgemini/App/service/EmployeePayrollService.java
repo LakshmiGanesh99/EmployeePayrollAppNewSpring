@@ -15,7 +15,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Autowired
 	private IEmployeePayrollRepository employeePayrollRepo;
-
+	
 	@Override
 	public Employee addEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
 		Employee emp = new Employee(employeePayrollDTO);
@@ -23,33 +23,33 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	}
 
 	@Override
-	public void updateEmployeeByID(long empID, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
-		Employee emp = getEmployeeData(empID);
-		if (employeePayrollDTO.name != null) {
-			emp.setName(employeePayrollDTO.name);
-		}
-		if (employeePayrollDTO.salary != 0.0) {
-			emp.setSalary(employeePayrollDTO.salary);
-		}
-		employeePayrollRepo.save(emp);
-	}
-	
-	@Override
 	public Employee getEmployeeData(long empId) throws EmployeeException{
 		return employeePayrollRepo.findById(empId).orElseThrow(() -> new EmployeeException("Invalid User id"));
 	}
-
+	
 	@Override
 	public List getAllEmployeeData() {
 		return employeePayrollRepo.findAll();
-	}
-	
-	public void deleteEmployeeById(long empID) throws EmployeeException {
-		Employee emp = employeePayrollRepo.findById(empID).orElseThrow(() -> new EmployeeException("Invalid User id"));
-		if (emp==null) {
-			return;
+	}	
+
+	@Override
+	public void updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
+		Employee emp = getEmployeeData(empId);
+		if(employeePayrollDTO.name != null) {
+			emp.setName(employeePayrollDTO.name);
 		}
-		employeePayrollRepo.deleteById(empID);
+		if(employeePayrollDTO.salary != 0.0) {
+			emp.setSalary(employeePayrollDTO.salary);
+		}
+		employeePayrollRepo.save(emp);
+		
 	}
 
+	@Override
+	public void deleteEmployeeById(long empId) throws EmployeeException {
+		Employee emp = employeePayrollRepo.findById(empId).orElseThrow(() -> new EmployeeException("Invalid User id"));
+		if(emp==null)
+			return;
+		employeePayrollRepo.deleteById(empId);
+	}	
 }
